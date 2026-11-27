@@ -64,7 +64,7 @@ jobs:
           PKG="$(printf '%s\n' "$BADGING" | sed -n "s/.*package: name='\([^']*\)'.*/\1/p")"
           VER="$(printf '%s\n' "$BADGING" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p")"
           echo "package=$PKG version=$VER expected=$EXPECTED_NAME"
-          test "$PKG" = "su.xash.cs16clientamxx"
+          test "$PKG" = "su.venomxtreme.freshstrike"
           test "$VER" = "$EXPECTED_NAME"
           CERT="$("$BUILD_TOOLS/apksigner" verify --print-certs FreshStrike1.6.apk | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
           echo "signer=$CERT"
