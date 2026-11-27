@@ -1,8 +1,4 @@
-# FreshStrike 1.6
-
-<p align="center"><img src="logo.png" width="240" alt="FreshStrike logo"></p>
-
-![Build](https://github.com/venomxtreme-cs/FreshStrike1.6/actions/workflows/build-apk.yml/badge.svg)
+# FreshStrike 1.6 [![Build](https://github.com/venomxtreme-cs/FreshStrike1.6/actions/workflows/build-apk.yml/badge.svg)](https://github.com/venomxtreme-cs/FreshStrike1.6/actions) <img align="right" width="128" height="128" src="logo.png" alt="FreshStrike" />
 
 **FreshStrike 1.6** is an unofficial Counter-Strike 1.6 client for Android. It runs on a built-in Xash3D FWGS engine and ships with AMX Mod X, Metamod, YaPB and CS-EBOT, so you can play offline with bots or join online servers without installing a second app.
 
