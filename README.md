@@ -59,25 +59,6 @@
 
 ---
 
-## What's new in 1.36.x
-
-| Build | Change |
-|---|---|
-| **1.36.18** | Fixed input getting stuck after opening the scoreboard while spectating. The spectator menu is now parked before the scoreboard opens, and the engine releases any held touch commands when the input mode changes. |
-| **1.36.17** | Proportional in-game fonts and the TrueType HUD face now re-rasterize for the active resolution instead of stretching a stale atlas. |
-| **1.36.16** | Fixed the Advanced crosshair section: removed overlapping status text and re-pitched the rows so nothing hangs over the footer. |
-| **1.36.15** | Replaced the old crosshair appearance controls with the Advanced crosshair section (style, size, gap, thickness, outline, color, dot, translucency) with live preview. |
-| **1.36.14** | Added the black-screen watchdog: a dead EGL surface is rebuilt automatically after about 2 seconds in-game. |
-| **1.36.13** | Real screen-resolution switching through Android display modes, with the choice persisted across restarts. |
-| **1.36.12** | Resolution ladder fallback for devices that report only one panel mode. |
-| **1.36.11** | Fixed team/buy/command menus not accepting taps on Zombie Escape servers. |
-| **1.36.10** | Fixed touch buttons disappearing after joining a game, and removed the temporary black screen at the end of loading. |
-| **1.36.09** | Touch menu and loading-screen fixes from the previous round. |
-
-The current release number is stored in `build-number.txt` (currently `18`).
-
----
-
 ## Install
 
 ### Requirements
