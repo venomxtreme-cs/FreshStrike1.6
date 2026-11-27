@@ -1,4 +1,4 @@
-# FreshStrike 1.6 [![Build](https://github.com/venomxtreme-cs/FreshStrike1.6/actions/workflows/build-apk.yml/badge.svg)](https://github.com/venomxtreme-cs/FreshStrike1.6/actions) <img align="right" width="128" height="128" src="logo.png" alt="FreshStrike" />
+# FreshStrike 1.6 <img align="right" width="128" height="128" src="logo.png" alt="FreshStrike" />
 
 **FreshStrike 1.6** is an unofficial Counter-Strike 1.6 client for Android. It runs on a built-in Xash3D FWGS engine and ships with AMX Mod X, Metamod, YaPB and CS-EBOT, so you can play offline with bots or join online servers without installing a second app.
 
@@ -67,7 +67,7 @@
 
 ### Steps
 
-1. Download **`FreshStrike1.6.apk`** from the [Releases](https://github.com/venomxtreme-cs/FreshStrike1.6/releases) page (or from the latest Actions artifact).
+1. Download **`FreshStrike1.6.apk`** from the [Releases](https://github.com/venomxtreme-cs/FreshStrike1.6/releases) page.
 2. On Android, allow installs from your browser or file manager when prompted.
 3. Install the APK. It uses the same signing key as CS16Fresh, so it updates over the old app.
 4. Open FreshStrike and grant the storage/media permission when asked. The addons cannot install without it.
@@ -96,17 +96,6 @@ Then choose the game from the launcher.
 ---
 
 ## Build
-
-### GitHub Actions (recommended)
-
-The workflow is `.github/workflows/build-apk.yml`.
-
-- Runs on every push to `main`/`master`, on pull requests, and manually from the **Actions** tab.
-- Uploads the artifact **`FreshStrike1.6`** containing **`FreshStrike1.6.apk`**.
-- Pushing a tag such as `1.36.19` or `v1.36.19` also publishes a GitHub Release with the APK attached.
-- The update repository is filled automatically from `${{ github.repository }}`, so releases always point the updater at the right repo.
-
-No secrets are required because the repository includes the signing keystore.
 
 ### Local build
 
@@ -150,7 +139,7 @@ Copy it to `FreshStrike1.6.apk` if you want the release asset name used by the u
 
 ### Signing
 
-`cs16client.keystore` is the key used by the existing app. Keeping it allows users to install new builds over old ones. For a production or Play Store build, replace it with a private keystore supplied through GitHub Actions secrets (`KEYSTORE_FILE_PATH`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`).
+`cs16client.keystore` is the key used by the existing app. Keeping it allows users to install new builds over old ones. For a production or Play Store build, replace it with a private keystore and keep it out of the repository.
 
 ---
 
@@ -158,7 +147,6 @@ Copy it to `FreshStrike1.6.apk` if you want the release asset name used by the u
 
 | Path | Purpose |
 |---|---|
-| `.github/workflows/build-apk.yml` | CI build and release workflow |
 | `app/src/main/java` | Launcher, settings, compiler, modules, Steam and update-checker sources |
 | `app/src/main/res` | Layouts, drawables, strings and themes |
 | `app/src/main/AndroidManifest.xml` | App manifest |
