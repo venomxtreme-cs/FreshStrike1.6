@@ -334,9 +334,9 @@ public class SettingsActivity extends Activity {
 
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo( getPackageName(), 0 );
-			version.setText( "CS16Fresh  v" + pi.versionName );
+			version.setText( "FreshStrike  v" + pi.versionName );
 		} catch( Throwable t ) {
-			version.setText( "CS16Fresh" );
+			version.setText( "FreshStrike" );
 		}
 
 		// build 114 merge: the engine is compiled into this APK - there is no

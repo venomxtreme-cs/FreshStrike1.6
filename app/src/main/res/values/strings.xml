@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FreshStrike 1.6</string>
+    <string name="app_name">FreshStrike</string>
 
     <!-- launcher menu -->
     <string name="menu_top_title">FreshStrike</string>
