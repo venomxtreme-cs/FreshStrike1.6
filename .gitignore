@@ -1,0 +1,21 @@
+# Gradle / Android build output
+.gradle/
+build/
+app/build/
+.cxx/
+.externalNativeBuild/
+local.properties
+.idea/
+*.iml
+
+# Built APKs (the workflow uploads them as artifacts)
+FreshStrike1.6.apk
+*.apk
+*.aab
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

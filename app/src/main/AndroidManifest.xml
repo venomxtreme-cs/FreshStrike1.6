@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- build 114 merge: engine (XashActivity) permissions that the game
+         manifest didn't have yet -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- OpenGL ES 1.1 (engine needs it; Play-store-style feature filter) -->
+    <uses-feature android:glEsVersion="0x00010000" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.gamepad"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.type.pc"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <!-- AMX Mod X addons auto-install writes into /storage/emulated/0/xash -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <!-- launcher update gate: check the latest published release and
+         download the new build when one is available -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!-- build 118 (item 2): targetSdk 36 = Android 16 predictive back, which
+         stops dispatching KEYCODE_BACK entirely (see libsdl SDL issue 13794),
+         so XashActivity's dispatchKeyEvent BACK-swallow never ran and the
+         system finished the activity -> "the game automaticly shut down".
+         false = opt out -> legacy BACK dispatch restored (official Android 16
+         behavior-changes doc: "migration or opt-out required"). -->
+    <application
+        android:forceQueryable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="false"
+        tools:targetApi="r">
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="su.xash.engine.MOD" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".CompilerActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" />
+
+        <activity
+            android:name=".PluginsActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" />
+
+        <activity
+            android:name=".ModulesActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" />
+
+        <!-- A7 build 136 (item 1): the Steam sign-in / friends WebView
+             opened by XashActivity.openSteamFriends() (engine command
+             "steamfriends") was MISSING here - the engine manifest
+             declares it, but after the build-114 merge only THIS app's
+             manifest is installed, so the command hit an
+             ActivityNotFoundException and the Steam login could never
+             open on device -->
+        <activity
+            android:name="su.xash.engine.SteamFriendsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|smallestScreenSize|keyboard|navigation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- build 113: Settings tab (launch options + engine crash log)
+             and the full-screen log reader -->
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" />
+        <activity
+            android:name=".LogViewerActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false" />
+
+                <!-- A7 build 127 (round 128, item 3): the second home-screen
+             launcher (".CZeroActivity" / "CSCZClient") is GONE - Condition
+             Zero is reached from the chooser inside this one app
+             (MainActivity.onCZeroPressed -> launchEngine(), gamedir=czero),
+             so a duplicate CZ icon only confused people
+             (user: "remove second launcher app conditions zero we already
+             added in app cs16fresh"). -->
+
+        <!-- result of the framework PackageInstaller session used by the
+             launcher's forced update flow -->
+        <receiver
+            android:name=".InstallStatusReceiver"
+            android:exported="false" />
+
+        <!-- build 114 merge: the Xash3D engine surface lives in THIS app now
+             (was su.xash.engine.XashActivity in the separate engine app).
+             The window is always fullscreen, so the system ignores
+             windowSoftInputMode and SoftKeyboardPan pans the view on its own -->
+        <activity
+            android:name="su.xash.engine.XashActivity"
+            android:alwaysRetainTaskState="true"
+            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation|touchscreen"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:preferMinimalPostProcessing="true"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+        </activity>
+    </application>
+
+    <queries>
+        <package android:name="su.xash.engine" />
+        <package android:name="su.xash.engine.test" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="application/vnd.android.package-archive" />
+        </intent>
+    </queries>
+</manifest>

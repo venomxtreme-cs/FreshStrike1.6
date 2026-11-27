@@ -1,0 +1,19 @@
+* text=auto
+
+# Never let Git touch binary payloads
+*.so binary
+*.jar binary
+*.keystore binary
+*.zip binary
+*.apk binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ttf binary
+*.fnt binary
+*.db binary
+*.pak binary
+*.wad binary
+*.bsp binary
+*.mdl binary
+*.spr binary
